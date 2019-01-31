@@ -1,4 +1,4 @@
-# Angular4-MEAN-CRUD
+# imark Data Entery Automation Project
 
 DEMO: `https://angular4-mean-crud.amcysoft.com`
 
