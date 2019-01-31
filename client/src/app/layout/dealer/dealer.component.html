@@ -1,0 +1,41 @@
+<div [@routerTransition]>
+	<app-page-header [heading]="'Organization Lists'" [icon]="'fa-th-list'"></app-page-header>
+
+	<div class="card mb-3" *ngIf="!isDealerDetails">
+		<div class="card-header">
+			<i class="fa fa-th-list"></i> Organization Lists
+		</div>
+		<div class="card-body mat-elevation-z8">
+			<div class="card-block table-responsive">
+				<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-bordered" id="dataTable" width="100%"
+				 cellspacing="0">
+					<thead>
+						<tr>
+							<th>Orgnaization Name</th>
+							<th>Location</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let dealer of dealers">
+							<td>{{ dealer.name }}</td>
+							<td>{{ dealer.location }}</td>
+							<td>
+								<button type="button" (click)="edit(dealer)" class="btn btn-primary">Edit</button>
+								<button type="button" (click)="delete(dealer)" class="btn btn-danger">Delete</button>
+								<button type="button" [routerLink]="['/dealer/dealer-details', dealer._id]"  class="btn btn-danger">Details</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!--<div class="card mb-3" *ngIf="isDealerDetails">
+		<div class="card-header">
+			<i class="fa fa-th-list"></i> Organization
+		</div>
+        <button type="button" (click)="bakcToDealer()" class="btn btn-danger btn-sm">Back To Dealer</button>
+		<app-dealer-details [dealerOrgId]="dealerOrgId"></app-dealer-details>
+	</div>-->
+</div>

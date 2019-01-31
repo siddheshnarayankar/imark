@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header mb-3">
+    <i class="fa fa-th-list"></i> Orgnization Details Lists
+  </div>
+  <div class="card-body mat-elevation-z8">
+
+    <div class="col-sm-6 mb-2">
+      <div *ngFor="let dealer_item of get_dealer_details">
+        <h4>Orngnaization Name : <span>{{dealer_item.name}}</span></h4>
+        <h4>Orngnaization Location : <span>{{dealer_item.location}}</span></h4>
+      </div>
+
+      <form [formGroup]="candidateForm" (ngSubmit)="onSubmit(candidateForm)">
+        <div class="form-group">
+          <input matInput type="text" formControlName="cand_name" class="form-control" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <input matInput type="text" formControlName="cand_age" class="form-control" placeholder="Your Age">
+        </div>
+
+        <!--<input type="file" ng2FileSelect name="photo" [uploader]="uploader" />
+
+        <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+      Upload an Image
+</button>-->
+<!--<input id="photo" type="file" />-->
+
+        <button mat-button class="btn btn-primary" type="submit">Send</button>
+
+      </form>
+
+      <button (click)="exportToExcel()" class="btn btn-primary">Export to excel</button>
+    </div>
+  </div>
+</div>
+
+<input id="photo" type="file" />
+
+<button type="button" class="btn btn-success" (click)="upload()">Upload with method 2</button>

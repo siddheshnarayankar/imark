@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>{{ action }} Todo</h2>
+<form #myForm="ngForm" novalidate>
+  <div mat-dialog-content>
+    <alert></alert>
+
+    <div class="form-group">
+      <input type="text" matInput [(ngModel)]="data.name" name="Name" placeholder="Title" class="form-control" required>
+    </div>
+     <div class="form-group">
+      <input type="text" matInput [(ngModel)]="data.location" name="Location" placeholder="Title" class="form-control" required>
+    </div>
+    
+  </div>
+  <div class="modal-footer">
+    <button mat-button [mat-dialog-close]="" class="btn btn-secondary">Cancel</button>
+    <button class="btn btn-primary" (click)="submit()" [disabled]="myForm.invalid" type="submit">{{ action }}</button>
+  </div>
+</form>
