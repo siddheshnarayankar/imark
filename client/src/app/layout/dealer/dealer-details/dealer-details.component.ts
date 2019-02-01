@@ -20,7 +20,7 @@ export class DealerDetailsComponent implements OnInit {
   get_dealer_org_id: any;
   get_dealer_details: Array<any> = [];
   dtTrigger: Subject<any> = new Subject();
-
+  pickNumber:any;
 
   public uploader: FileUploader = new FileUploader({ url: URL + "/test", itemAlias: 'photo' });
 
@@ -34,13 +34,13 @@ export class DealerDetailsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    // this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
 
-    console.log('tets', this.uploader);
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log('ImageUpload:uploaded:', item, status, response);
-      // alert('File uploaded successfully');
-    };
+    // console.log('tets', this.uploader);
+    // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+    //   console.log('ImageUpload:uploaded:', item, status, response);
+    //   // alert('File uploaded successfully');
+    // };
 
     // Get ID 
     this.activateRoute.params.subscribe(params => {
@@ -61,7 +61,8 @@ export class DealerDetailsComponent implements OnInit {
     this.candidateForm = this.fb.group({
       cand_name: '',
       cand_age: '',
-      cand_image:'',
+      cand_image_fold:'',
+      cand_image_name:'',
       cand_org_id: this.get_dealer_org_id
     });
 
@@ -74,8 +75,17 @@ export class DealerDetailsComponent implements OnInit {
     // console.log('Name', form.value.name);
     // console.log('Email', form.value.email);
     // console.log('Message', form.value.message);
- 
- 
+
+    this.pickNumber = Math.floor((Math.random() * 5000000) + 1);
+    this.upload(this.pickNumber);
+  
+  //  this.candidateForm.
+    
+  
+
+    form.controls['cand_image_fold'].setValue(this.get_dealer_org_id + this.get_dealer_details[0].name);
+    form.controls['cand_image_name'].setValue(this.pickNumber);
+console.log(form);
 
     this.dealerService.addCandidates(form.value).subscribe(
       resp => {
@@ -86,21 +96,35 @@ export class DealerDetailsComponent implements OnInit {
 
 
   }
+   onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+ 
+      reader.readAsDataURL(file);
+      console.log(file['name']);
+    }
+  }
 
-  upload() {
+  upload(stdName) {
+    
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
-    console.log("iam+ " + inputEl);
+    console.log("iam+ " + inputEl.files.item);
+  
     let fileCount: number = inputEl.files.length;
+     
     let formData = new FormData();
     if (fileCount > 0) { // a file was selected
       for (let i = 0; i < fileCount; i++) {
-        formData.append('photo', inputEl.files.item(i));
+        formData.append('photo', inputEl.files.item(i), this.get_dealer_org_id +'.'+ this.get_dealer_details[0].name + '.' + stdName);
+        console.log(inputEl.files.item(i).name);
       }
        
       this.dealerService
         .addImage(formData).map((res: any) => res).subscribe(
         (success) => {
-          alert(success._body);
+          // alert(success._body);
+          return true;
         },
         (error) => alert(error)
         );

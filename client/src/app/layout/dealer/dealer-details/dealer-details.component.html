@@ -34,6 +34,5 @@
   </div>
 </div>
 
-<input id="photo" type="file" />
-
+<input id="photo" type="file"  (change)="onFileChange($event)"  value="test"/>
 <button type="button" class="btn btn-success" (click)="upload()">Upload with method 2</button>

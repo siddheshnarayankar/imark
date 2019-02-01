@@ -17,8 +17,18 @@ var Candidate = new Schema(
 			type: String,
 			required: false,
 			trim: true
-		} 
-	} 
+		},
+		cand_image_fold: {
+			type: String,
+			required: false,
+			trim: true
+		},
+		cand_image_name: {
+			type: String,
+			required: false,
+			trim: true
+		}
+	}
 );
 
 module.exports = mongoose.model('Candidate', Candidate);
