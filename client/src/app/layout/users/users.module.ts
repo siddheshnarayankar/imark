@@ -7,9 +7,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
 import { SharedService, PageHeaderModule, AlertModule } from './../../shared';
 import { UserAddEditDialog } from './components/user-add-edit.component';
 import { UserService } from './user.service';
+import { ExcelService } from './user-org-execel.service';
 
 @NgModule({
     imports: [
@@ -25,7 +27,8 @@ import { UserService } from './user.service';
     ],
     declarations: [
         UsersComponent,
-        UserAddEditDialog
+        UserAddEditDialog,
+        UserdetailsComponent
     ],
     providers: [
         UserService,
@@ -33,7 +36,8 @@ import { UserService } from './user.service';
             provide: HTTP_INTERCEPTORS,
             useClass: SharedService,
             multi: true
-        }
+        },
+        ExcelService
     ],
     entryComponents: [
         [UserAddEditDialog]

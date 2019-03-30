@@ -53,12 +53,17 @@ exports = module.exports = function (app) {
             });
     });
 
+    
+
+
+
 
     router.post('/', function (req, res, next) {
         var data = {
             cand_name: req.body.cand_name,
             cand_age: req.body.cand_age,
             cand_org_id: req.body.cand_org_id,
+            cand_dealer_id:req.body.cand_dealer_id,
             cand_image_fold:req.body.cand_image_fold,
             cand_image_name:req.body.cand_image_name
         }

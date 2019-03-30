@@ -6,21 +6,19 @@ import { DataTablesModule } from 'angular-datatables';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms'
-import { FileSelectDirective } from 'ng2-file-upload';
+ 
+import { SharedService, PageHeaderModule, AlertModule } from './../shared';
+import { StudentsregRoutingModule } from './studentsreg-routing.module';
+import { StudentsregComponent } from './studentsreg.component';
 
-import { DealerRoutingModule } from './dealer-routing.module';
-import { DelearComponent } from './dealer.component';
-import { DealerDetailsComponent } from './dealer-details/dealer-details.component';
-import { SharedService, PageHeaderModule, AlertModule } from './../../shared';
-import { DealerOrgAddEditDialog } from './components/dealerOrg-add-edit.component';
-import { DealerService } from './dealer.service';
-import { ExcelService } from './dealer-org-execel.service';
+
+import { StudentsregService } from './studentsreg.service'
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        DealerRoutingModule,
+        StudentsregRoutingModule,
         PageHeaderModule,
         DataTablesModule,
         MatDialogModule,
@@ -29,22 +27,18 @@ import { ExcelService } from './dealer-org-execel.service';
         ReactiveFormsModule
     ],
     declarations: [
-        DelearComponent,
-        DealerDetailsComponent,
-        DealerOrgAddEditDialog,
-        FileSelectDirective
+        StudentsregComponent
     ],
     providers: [
-        DealerService,
+        StudentsregService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: SharedService,
             multi: true
         },
-        ExcelService
     ],
     entryComponents: [
-        [DealerOrgAddEditDialog]
+         
     ]
 })
-export class DealerModule { }
+export class StudentsregModule { }

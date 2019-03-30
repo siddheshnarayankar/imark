@@ -6,3 +6,16 @@
 @import "responsive";
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+
+.card-body {
+    padding: 15px;
+}
+
+.tm-section-heading{
+    h4{
+        font-size: 18px;
+
+    }
+}

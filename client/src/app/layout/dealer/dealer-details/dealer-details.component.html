@@ -1,38 +1,73 @@
 <div class="card">
   <div class="card-header mb-3">
-    <i class="fa fa-th-list"></i> Orgnization Details Lists
+    <i class="fa fa-th-list"></i> Orgnization Details
   </div>
   <div class="card-body mat-elevation-z8">
 
     <div class="col-sm-6 mb-2">
       <div *ngFor="let dealer_item of get_dealer_details">
-        <h4>Orngnaization Name : <span>{{dealer_item.name}}</span></h4>
-        <h4>Orngnaization Location : <span>{{dealer_item.location}}</span></h4>
+        <div class="tm-section-heading">
+          <h4>Name : <span>{{dealer_item.name}}</span></h4>
+          <h4>Location : <span>{{dealer_item.location}}</span></h4>
+        </div>
       </div>
 
-      <form [formGroup]="candidateForm" (ngSubmit)="onSubmit(candidateForm)">
+      <hr>
+      <div class="card-section">
+        <mat-tab-group>
+          <mat-tab label="by Own">
+
+          </mat-tab>
+          <mat-tab label="by Student">
+            <form [formGroup]="studentTokenForm" (ngSubmit)="onStudentTokenGenerate(studentTokenForm)">
+              <div class="form-group">
+                <input matInput type="text" formControlName="stud_count" class="form-control" placeholder="Enter Totoal Students">
+              </div>
+              <div class="form-group">
+                <button mat-button class="btn btn-primary" type="submit">Generate Token</button>
+              </div>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+      <hr>
+
+
+      <div>
+        <h4>Students Token and Login URl</h4>
+        <table>
+          <tr>
+            <td>Download</td>
+            <td>URL</td>
+          </tr>
+           <tr>
+     
+     
+            <td> <button (click)="getCurrentTokens()" class="btn btn-primary">Export to excel</button></td>
+            <td>{{students_url}}</td>
+          </tr>
+        </table>
+
+        <!--<form class="hidden" [formGroup]="candidateForm" (ngSubmit)="onSubmit(candidateForm)">
         <div class="form-group">
           <input matInput type="text" formControlName="cand_name" class="form-control" placeholder="Your name">
         </div>
         <div class="form-group">
           <input matInput type="text" formControlName="cand_age" class="form-control" placeholder="Your Age">
         </div>
-
-        <!--<input type="file" ng2FileSelect name="photo" [uploader]="uploader" />
-
-        <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-      Upload an Image
-</button>-->
-<!--<input id="photo" type="file" />-->
+        <div class="form-group">
+          <input id="photo" type="file" (change)="onFileChange($event)" value="test" />
+        </div>
+     
 
         <button mat-button class="btn btn-primary" type="submit">Send</button>
 
-      </form>
+      </form>-->
 
-      <button (click)="exportToExcel()" class="btn btn-primary">Export to excel</button>
+      </div>
     </div>
   </div>
-</div>
 
-<input id="photo" type="file"  (change)="onFileChange($event)"  value="test"/>
-<button type="button" class="btn btn-success" (click)="upload()">Upload with method 2</button>
+
+  <!--<button type="button" class="btn btn-success" (click)="upload()">Upload with method 2</button>-->

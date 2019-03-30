@@ -18,6 +18,11 @@ var Candidate = new Schema(
 			required: false,
 			trim: true
 		},
+		cand_dealer_id: {
+			type: String,
+			required: false,
+			trim: true
+		},
 		cand_image_fold: {
 			type: String,
 			required: false,

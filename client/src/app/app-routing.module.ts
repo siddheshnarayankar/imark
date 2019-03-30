@@ -12,19 +12,25 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: './login/login.module#LoginModule',
-    data: {title: 'Login'},
+    data: { title: 'Login' },
     canActivate: [GuestGuard]
   },
   {
     path: 'signup',
     loadChildren: './signup/signup.module#SignupModule',
-    data: {title: 'Signup'},
+    data: { title: 'Signup' },
+    canActivate: [GuestGuard]
+  },
+  {
+    path: 'studentsreg',
+    loadChildren: './studentsreg/studentsreg.module#StudentsregModule',
+    data: { title: 'Students Register Form' },
     canActivate: [GuestGuard]
   },
   {
     path: '404-not-found',
     loadChildren: './not-found/not-found.module#NotFoundModule',
-    data: {title: 'Page Not Found'}
+    data: { title: 'Page Not Found' }
   },
   {
     path: '**',
@@ -33,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [ RouterModule.forRoot(routes) ],
-	exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

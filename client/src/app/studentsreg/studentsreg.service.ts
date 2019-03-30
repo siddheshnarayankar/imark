@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class DealerService {
+export class StudentsregService {
 
   url: string = "/api/dealers";
   url_1: string = "/api/candidates";
@@ -12,8 +12,8 @@ export class DealerService {
 
   constructor(private http: HttpClient) { }
 
-  public get(id): Observable<any> {
-    return this.http.get(this.url + "/orglist/" + id);
+  public get(std_d_id, std_o_id, passcode): Observable<any> {
+    return this.http.get(this.url_2 + "/" + std_d_id + "/" + std_o_id + "/" + passcode);
   }
 
   public add(data): Observable<any> {
@@ -27,30 +27,15 @@ export class DealerService {
   public delete(id): Observable<any> {
     return this.http.delete(this.url + "/" + id);
   }
-
-
-  // Dealer Details API
-  public getDealerDetails(id): Observable<any> {
-    return this.http.get(this.url + "/" + id);
-  }
-
-  public addCandidates(data): Observable<any> {
-    return this.http.post(this.url_1, data);
-  }
-  public getCandidates(id): Observable<any> {
-    return this.http.get(this.url_1 + "/" + id);
-  }
-
   public addImage(data): Observable<any> {
     return this.http.post(this.url_1 + "/test", data);
   }
 
-
-  // Student Tokens details API
-  public genrateToken(data): Observable<any> {
-    return this.http.post(this.url_2,data);
+  public getCurrentOrgDetails(current_Org_id): Observable<any> {
+    return this.http.get(this.url + "/" + current_Org_id);
   }
-  public getGenrateTokens(current_Org_id): Observable<any> {
-    return this.http.get(this.url_2 + "/" + current_Org_id);
+
+  public addCandidates(data): Observable<any> {
+    return this.http.post(this.url_1, data);
   }
 }

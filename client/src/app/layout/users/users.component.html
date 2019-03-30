@@ -27,6 +27,7 @@
 							<td>
 								<button type="button" (click)="edit(user)" class="btn btn-primary">Edit</button>
 								<button type="button" (click)="delete(user)" class="btn btn-danger">Delete</button>
+								<button type="button" [routerLink]="['/users/userdetails',user.id]" class="btn btn-danger">Details</button>
 							</td>
 						</tr>
 					</tbody>
