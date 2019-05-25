@@ -1,72 +1,71 @@
 <div class="card">
   <div class="card-header mb-3">
-    <i class="fa fa-th-list"></i> Orgnization Details
+    <i class="fa fa-th-list"></i> College Details
   </div>
   <div class="card-body mat-elevation-z8">
+    <table class="table" *ngIf="toggleFlag">
+      <thead>
+        <tr>
+          <th>Colleges Name</th>
+          <th>Location Name</th>
+          <th>UID</th>
+          <th>Total/Current</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dealer_item of get_dealer_details">
+          <th>{{dealer_item.name}}</th>
+          <th>{{dealer_item.location}}</th>
+          <th><a href="javascript:void(0)" (click)="getCurrentTokens()">Get UID</a> </th>
+          <th>{{getTokensListCountD}}/{{getTokensListCountC}}</th>
+        </tr>
+      </tbody>
+    </table>
 
-    <div class="col-sm-6 mb-2">
-      <div *ngFor="let dealer_item of get_dealer_details">
-        <div class="tm-section-heading">
-          <h4>Name : <span>{{dealer_item.name}}</span></h4>
-          <h4>Location : <span>{{dealer_item.location}}</span></h4>
+
+    <br>
+    <table class="table" *ngIf="toggleFlag">
+      <thead>
+        <tr>
+          <th>UID Links copy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th><a href="#" target="_blank">{{students_url}}</a></th>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+    <div class="card-section" *ngIf="!toggleFlag">
+    
+      <h4>Create Students passcode and URL</h4>
+      <form [formGroup]="studentTokenForm" (ngSubmit)="onStudentTokenGenerate(studentTokenForm)">
+        <div class="form-group" *ngFor="let dealer_item of get_dealer_details">
+          <input matInput type="text" formControlName="stud_count" class="form-control" maxlength="10" placeholder="Enter Totoal Students">
         </div>
-      </div>
-
-      <hr>
-      <div class="card-section">
+        <div class="form-group">
+          <button mat-button class="btn btn-primary" type="submit">Generate Token</button>
+        </div>
+      </form>
+      <!--<hr>
         <mat-tab-group>
           <mat-tab label="by Own">
 
           </mat-tab>
           <mat-tab label="by Student">
-            <form [formGroup]="studentTokenForm" (ngSubmit)="onStudentTokenGenerate(studentTokenForm)">
-              <div class="form-group">
-                <input matInput type="text" formControlName="stud_count" class="form-control" placeholder="Enter Totoal Students">
-              </div>
-              <div class="form-group">
-                <button mat-button class="btn btn-primary" type="submit">Generate Token</button>
-              </div>
-            </form>
+
           </mat-tab>
-        </mat-tab-group>
-      </div>
-
-      <hr>
-
-
-      <div>
-        <h4>Students Token and Login URl</h4>
-        <table>
-          <tr>
-            <td>Download</td>
-            <td>URL</td>
-          </tr>
-           <tr>
-     
-     
-            <td> <button (click)="getCurrentTokens()" class="btn btn-primary">Export to excel</button></td>
-            <td>{{students_url}}</td>
-          </tr>
-        </table>
-
-        <!--<form class="hidden" [formGroup]="candidateForm" (ngSubmit)="onSubmit(candidateForm)">
-        <div class="form-group">
-          <input matInput type="text" formControlName="cand_name" class="form-control" placeholder="Your name">
-        </div>
-        <div class="form-group">
-          <input matInput type="text" formControlName="cand_age" class="form-control" placeholder="Your Age">
-        </div>
-        <div class="form-group">
-          <input id="photo" type="file" (change)="onFileChange($event)" value="test" />
-        </div>
-     
-
-        <button mat-button class="btn btn-primary" type="submit">Send</button>
-
-      </form>-->
-
-      </div>
+        </mat-tab-group>-->
     </div>
+
+
+
+
   </div>
 
 

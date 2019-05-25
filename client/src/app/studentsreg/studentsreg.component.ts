@@ -25,6 +25,8 @@ export class StudentsregComponent implements OnInit {
 
   isValidLogin: boolean = false;
 
+  current_uidarr: any;
+
   public uploader: FileUploader = new FileUploader({ url: URL + "/test", itemAlias: 'photo' });
 
   constructor(private fb: FormBuilder, private el: ElementRef, private studentsregService: StudentsregService,
@@ -48,7 +50,7 @@ export class StudentsregComponent implements OnInit {
       cand_image_fold: '',
       cand_image_name: '',
       cand_org_id: '',
-      cand_dealer_id:''
+      cand_dealer_id: ''
     });
   }
 
@@ -78,6 +80,8 @@ export class StudentsregComponent implements OnInit {
     this.studentsregService.addCandidates(form.value).subscribe(
       resp => {
         console.log('respo', resp);
+        
+        this.alertService.success('Submitted Successfully :)')
       },
       error => this.alertService.error(error)
     );
@@ -97,8 +101,8 @@ export class StudentsregComponent implements OnInit {
 
   upload(stdName) {
 
-    console.log(this.get_dealer_details[0],'First');
-    console.log(this.get_dealer_details,'second');
+    console.log(this.get_dealer_details[0], 'First');
+    console.log(this.get_dealer_details, 'second');
 
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
     console.log("iam+ " + inputEl.files.item);
@@ -124,6 +128,13 @@ export class StudentsregComponent implements OnInit {
     }
   }
 
+  setStatusFalg(id1, id2, passcode) {
+    this.studentsregService.setStatusFlag(id1, id2, passcode).subscribe(
+      resp => {
+
+      }
+    )
+  }
 
   getCurrentOrgDetails() {
     this.studentsregService.getCurrentOrgDetails(this.get_dealer_org_id).subscribe(
@@ -139,25 +150,41 @@ export class StudentsregComponent implements OnInit {
   onStudentLogin(form: FormGroup) {
 
     let uidarr = form.value.std_id.split('.');
-
+    this.current_uidarr = form.value.std_id.split('.');
     this.get_dealer_org_id = uidarr[1];
     console.log(uidarr[0]);
-    this.studentsregService.get(uidarr[0], uidarr[1], form.value.std_passcode).subscribe(
-      resp => {
 
-        if (resp.length) {
-          this.isValidLogin = true;
-          this.getCurrentOrgDetails();
-          console.log('True');
-        } else {
-          this.isValidLogin = false;
-          console.log('Fail');
-        }
+    if (uidarr[0].length) {
 
-        console.log('res', resp);
-      },
-      error => this.alertService.error(error)
-    )
+
+
+      this.studentsregService.get(uidarr[0], uidarr[1], form.value.std_passcode).subscribe(
+        resp => {
+          console.log('res', resp);
+          if (resp.length) {
+            //  console.log(resp[0].stud_token[0].status, 'login details');
+            if (resp[0].stud_token.length && resp[0].stud_token[0].status === true) {
+              this.isValidLogin = true;
+              this.getCurrentOrgDetails();
+              this.setStatusFalg(uidarr[0], uidarr[1], form.value.std_passcode);
+              console.log('True');
+            } else {
+              this.isValidLogin = false;
+              console.log('Fail');
+
+            }
+          } else {
+           this.alertService.info('Invalid Entery')
+          }
+
+
+          console.log('res', resp);
+        },
+        error => this.alertService.error(error)
+      )
+    } else {
+      this.alertService.info('Enter User Id and password')
+    }
   }
 
 }

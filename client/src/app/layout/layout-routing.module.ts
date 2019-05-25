@@ -9,22 +9,27 @@ const routes: Routes = [
             {
                 path: 'dashboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule',
-                data: {title: 'Dashboard'}
+                data: { title: 'Dashboard' }
             },
             {
                 path: 'users',
                 loadChildren: './users/users.module#UsersModule',
-                data: {title: 'Users'}
+                data: { title: 'Users' }
             },
             {
                 path: 'todos',
                 loadChildren: './todos/todos.module#TodosModule',
-                data: {title: 'Todo Lists'}
+                data: { title: 'Todo Lists' }
             },
             {
                 path: 'dealer',
                 loadChildren: './dealer/dealer.module#DealerModule',
-                data: {title: 'Dealer Lists'}
+                data: { title: 'Dealer Lists' }
+            },
+            {
+                path: 'order',
+                loadChildren: './order/order.module#OrderModule',
+                data: { title: 'Order Lists' }
             }
         ]
     }

@@ -8,6 +8,7 @@ export class UserService {
   url: string = "/api/users";
   url_1: string = "/api/dealers";
   url_2: string = "/api/candidates";
+  url_3: string = "/api/studenttokens";
 
   constructor(private http: HttpClient) { }
 
@@ -35,5 +36,8 @@ export class UserService {
     return this.http.get(this.url_2 + "/" + id);
   }
 
+  public getTokenStatus(id): Observable<any> {
+    return this.http.get(this.url_3 + "/tokenStatus/" + id);
+  }
 
 }

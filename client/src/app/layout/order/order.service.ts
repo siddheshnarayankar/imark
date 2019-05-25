@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class DealerService {
+export class OrderService {
 
   url: string = "/api/dealers";
   url_1: string = "/api/candidates";

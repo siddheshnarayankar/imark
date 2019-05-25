@@ -33,8 +33,8 @@ export class UserAddEditDialog {
       resp => {
         this.dialogRef.close({
           message: resp.message,
-          data: resp.user,
-          action: this.action
+          data: this.data,
+          action: this.action,
         });
       },
       error => this.alertService.error(error)

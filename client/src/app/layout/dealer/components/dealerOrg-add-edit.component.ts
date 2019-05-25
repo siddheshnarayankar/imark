@@ -42,9 +42,11 @@ export class DealerOrgAddEditDialog  {
     manager.subscribe(
       resp => {
         this.dialogRef.close({
-          name: resp.message,
+          message: resp.message,
           location: resp.todo,
-          action: this.action
+          action: this.action,
+          data : this.data
+
         });
       },
       error => this.alertService.error(error)

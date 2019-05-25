@@ -1,29 +1,28 @@
-<app-page-header [heading]="'Users Details'" [icon]="'fa-user'"></app-page-header>
+<app-page-header [heading]="'Users Colleges Details'" [icon]="'fa-user'"></app-page-header>
 <div class="card mb-3">
   <div class="card-header">
-    <i class="fa fa-user"></i> <span>Users Details</span>
+    <i class="fa fa-user"></i> <span>User Colleges Details</span>
   </div>
 
   <div class="card-body mat-elevation-z8">
     <div class="card-block">
-
-      <h4>User Name</h4>
-      <br>
       <table class="table">
         <thead>
           <tr>
             <th>Colleges Name</th>
             <th>Location Name</th>
             <th>Records</th>
-             <th>Folder Links</th>
+            <th>Folder Links</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of user_org_list">
-            <th>{{item.name}}</th>
-            <th>{{item.location}}</th>
-             <th><a href="javascript:void(0)" (click)="getListOfStud(item._id);">Get List</a> </th>
-            <th><a href="E:/GitImarkCode/imark/uploads/" target="_blank">Download here</a></th>
+            <td>{{item.name}}</td>
+            <td>{{item.location}}</td>
+            <td><a href="javascript:void(0)" (click)="getListOfStud(item._id);" *ngIf="countStdPer === 100">Get List</a> </td>
+            <td><a href="E:/GitImarkCode/imark/uploads/" target="_blank">Download here</a></td>
+            <td><a href="javascript:void(0)" (click)="getStudentStatus(item._id);">Status</a> <b class="alert-success">{{countStdPer}}%</b></td>
           </tr>
         </tbody>
       </table>

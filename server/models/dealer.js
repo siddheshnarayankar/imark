@@ -12,13 +12,18 @@ var Dealer = new Schema(
 			type: String,
 			required: false,
 			trim: true
-		} ,
+		},
 		curr_dealer_id: {
 			type: String,
 			required: false,
 			trim: true
-		} 
-	} 
+		},
+		status: {
+			type: String,
+			required: false,
+			trim: true
+		}
+	}
 );
 
 module.exports = mongoose.model('Dealer', Dealer);

@@ -8,6 +8,11 @@ var Studenttoken = new Schema(
             required: false,
             trim: true
         },
+        stud_token_status: {
+            type: String,
+            required: false,
+            trim: true
+        },
         stud_org_id: {
             type: String,
             required: false,

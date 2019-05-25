@@ -16,19 +16,34 @@ exports = module.exports = function(app) {
 		var data = {
 			name: req.body.name,
 			location: req.body.location,
-			curr_dealer_id: req.body.curr_dealer_id
+			curr_dealer_id: req.body.curr_dealer_id,
+			status:false
 		};
 		app.models.Dealer.create(data, function(err, dealer) {
 			if(err) next(err);
  console.log(data);
 			res.status(200).json({
 				dealer: dealer,
-				message: 'Orgnization has been added successfully.'
+				message: 'College has been added successfully.'
 			});
 
 		});
 	});
 
+	router.put('/updateStdTStatus/:id', function(req, res, next) {
+		var data = {
+			 status:true
+		};
+		app.models.Dealer.findOneAndUpdate({_id: req.params.id}, data, {new: true}, function(err, dealer) {
+			if(err) return next(err);
+			
+			res.status(200).json({
+				dealer: dealer,
+				message: 'dealer status has been updated successfully.'
+			});
+
+		});
+	});
 
 	router.delete('/:id',function(req,res,next){
 		app.models.Dealer.findOneAndRemove({_id: req.params.id},function(err){
@@ -39,6 +54,9 @@ exports = module.exports = function(app) {
 			})
 		});
 	});
+
+
+	
 
 
  	router.get('/:id', function(req, res, next) {

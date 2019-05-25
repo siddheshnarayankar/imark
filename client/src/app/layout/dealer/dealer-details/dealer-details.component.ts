@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DealerService } from './../dealer.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -24,10 +24,15 @@ export class DealerDetailsComponent implements OnInit {
   pickNumber: any;
   curr_token_decoded_id: string;
 
-  students_url:string ='';
- 
+  students_url: string = '';
+  public stud_token_status: boolean = false;
 
   get_toknes: any;
+
+  getTokensListCountD: any;
+  getTokensListCountC: any;
+
+  toggleFlag: boolean = false;
 
   public uploader: FileUploader = new FileUploader({ url: URL + "/test", itemAlias: 'photo' });
 
@@ -37,20 +42,13 @@ export class DealerDetailsComponent implements OnInit {
     private excelService: ExcelService,
     private activateRoute: ActivatedRoute,
     private alertService: AlertService,
-    private el: ElementRef) { 
-    }
+    private el: ElementRef) {
+  }
 
   ngOnInit() {
     let curr_token = JSON.parse(localStorage.getItem('userInfo') || '{}');
     let curr_token_decode = jwtDecode(curr_token.token);
     this.curr_token_decoded_id = curr_token_decode._id;
-    // this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-// this.students_url = "Hello";
-    // console.log('tets', this.uploader);
-    // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-    //   console.log('ImageUpload:uploaded:', item, status, response);
-    //   // alert('File uploaded successfully');
-    // };
 
     // Get ID 
     this.activateRoute.params.subscribe(params => {
@@ -58,14 +56,6 @@ export class DealerDetailsComponent implements OnInit {
       console.log(params.id, 'params');
 
     });
-
-    this.dealerService.getDealerDetails(this.get_dealer_org_id).subscribe(
-      resp => {
-        this.get_dealer_details.push(resp);
-        this.dtTrigger.next();
-      },
-      error => this.alertService.error(error)
-    );
 
 
     this.candidateForm = this.fb.group({
@@ -82,11 +72,32 @@ export class DealerDetailsComponent implements OnInit {
       stud_dealer_id: ''
     });
 
-    console.log(this.get_dealer_details);
 
-    // this.getCurrentTokens();
+    this.onDealerDetails();
+
   }
 
+
+  onDealerDetails() {
+    this.dealerService.getDealerDetails(this.get_dealer_org_id).subscribe(
+      resp => {
+        this.get_dealer_details.push(resp);
+
+        this.stud_token_status = this.get_dealer_details[0].status;
+
+        if (this.get_dealer_details[0].status === 'true') {
+          this.toggleFlag = true;
+        } else {
+          this.toggleFlag = false;
+        }
+        this.getCurrentTokensCounts();
+
+      },
+      error => this.alertService.error(error)
+    );
+  }
+
+ 
   onStudentTokenGenerate(form: FormGroup) {
     let stud_randNo;
 
@@ -103,6 +114,7 @@ export class DealerDetailsComponent implements OnInit {
 
         // this.excelService.exportAsExcelFile(resp, 'this.get_dealer_details[0].name');
         this.getCurrentTokens();
+        this.setStudentTokenStatus();
       },
       error => this.alertService.error(error)
       );
@@ -112,11 +124,45 @@ export class DealerDetailsComponent implements OnInit {
   getCurrentTokens() {
     this.dealerService.getGenrateTokens(this.get_dealer_org_id).subscribe(
       res => {
-        console.log(res,'current Tokens');
-        console.log(res[0].stud_uid,'uid');
-        this.students_url=res[0].stud_uid;
+        // console.log(res, 'current Tokens');
+        // console.log(res[0].stud_uid, 'uid');
+        this.students_url = res[0].stud_uid;
         this.excelService.exportAsExcelFile(res[0].stud_token, 'Students passcode list');
         this.dtTrigger.next();
+      })
+  }
+
+
+  getCurrentTokensCounts() {
+    this.dealerService.getGenrateTokens(this.get_dealer_org_id).subscribe(
+      res => {
+        // console.log(res, 'current Tokens');
+        // console.log(res[0].stud_uid, 'uid');
+        if (res.length) {
+          this.getTokensListCountD = res[0].stud_token.length;
+          // console.log(this.getTokensListCountD, 'getTokensListCount');
+          let s = res[0].stud_token.filter((item) => {
+            if (item.status == true) {
+              return true;
+            }
+          })
+
+          this.getTokensListCountC = s.length;
+          // console.log(this.getTokensListCountC, 'getTokensListCount after');
+          // this.excelService.exportAsExcelFile(res[0].stud_token, 'Students passcode list');
+          this.dtTrigger.next();
+        }
+
+      })
+
+
+
+  }
+
+  setStudentTokenStatus() {
+    this.dealerService.updateStudentTokenStatus(this.get_dealer_org_id, 'ture').subscribe(
+      resp => {
+        console.log(resp, 'Studet token genrate College Status True');
       })
   }
 

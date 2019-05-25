@@ -59,7 +59,6 @@
     "datatables.net-buttons-dt": "^1.4.2",
     "datatables.net-dt": "^1.10.16",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
     "font-awesome": "4.7.0",
     "jsonwebtoken": "^8.1.0",
     "jwt-decode": "^2.2.0",

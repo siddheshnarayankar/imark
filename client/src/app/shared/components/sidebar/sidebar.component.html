@@ -3,14 +3,17 @@
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' }}
         </a>
-        <a routerLink="/users" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a routerLink="/users" *ngIf="currentRole === 'admin'" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-user"></i>&nbsp;{{ 'Users' }}
         </a>
         <!--<a routerLink="/todos" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-th-list"></i>&nbsp;{{ 'Todo Lists' }}
         </a>-->
-        <a routerLink="/dealer" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-th-list"></i>&nbsp;{{ 'Organization Lists' }}
+        <a routerLink="/dealer" *ngIf="currentRole === 'dealer'" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-th-list"></i>&nbsp;{{ 'College Lists' }}
+        </a>
+        <a routerLink="/order" *ngIf="currentRole === 'dealer'" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-th-list"></i>&nbsp;{{ 'Order Form' }}
         </a>
     </ul>
 </nav>

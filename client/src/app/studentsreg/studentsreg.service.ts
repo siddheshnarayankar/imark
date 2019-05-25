@@ -38,4 +38,9 @@ export class StudentsregService {
   public addCandidates(data): Observable<any> {
     return this.http.post(this.url_1, data);
   }
+  public setStatusFlag(std_d_id, std_o_id,passcode): Observable<any> {
+    return this.http.put(this.url_2 + "/codestatus/" + std_d_id + "/" + std_o_id + "/" + passcode,'false');
+  }
+
+
 }

@@ -32,7 +32,7 @@ export class DelearComponent implements OnInit {
 		let component = this;
 		this.dtOptions = {
 			paginationType: 'full_numbers',
-			displayLength: 10,
+			displayLength: 4,
 			select: true,
 			dom: 'Bfrtip',
 			buttons: [
@@ -74,11 +74,13 @@ export class DelearComponent implements OnInit {
 			if (result) {
 				this.alertService.success(result.message);
 				if (result.action == 'Add') {
+
+					console.log(result,'result.data');
 					setTimeout(()=>{
 						this.dealers.push(result.data);
 					},3000);
 					
-					// console.log(this.dealers);
+				  console.log(this.dealers);
 				}
 			}
 		});

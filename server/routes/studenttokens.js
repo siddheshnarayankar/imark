@@ -9,6 +9,48 @@ exports = module.exports = function (app) {
             .exec(function (err, studenttokens) {
                 if (err) next(err);
 
+                res.status(200).json({
+                    studenttokens: studenttokens || [],
+                    message: 'studenttokens status has been updated successfully.'
+                });
+            });
+    });
+
+
+
+    router.put('/codestatus/:std_d_id/:std_o_id/:passcode', function (req, res, next) {
+        // var data = {
+        //     status: true
+        // };
+
+        app.models.Studenttoken.updateOne(
+            { stud_dealer_id: req.params.std_d_id, stud_org_id: req.params.std_o_id, "stud_token.code": req.params.passcode },
+            { $set: { "stud_token.$.status": false } }, function (err, studenttokens) {
+                if (err) return next(err);
+
+                res.status(200).json({
+                    studenttokens: studenttokens,
+                    message: 'studenttokens status has been updated successfully.'
+                });
+
+            });
+        // app.models.Dealer.findOneAndUpdate({}, data, { new: true }, function (err, dealer) {
+        //     if (err) return next(err);
+
+        //     res.status(200).json({
+        //         dealer: dealer,
+        //         message: 'dealer status has been updated successfully.'
+        //     });
+
+        // });
+    });
+
+
+    router.get('/tokenStatus/:id', function (req, res, next) {
+        app.models.Studenttoken.find({ stud_org_id: req.params.id })
+            .exec(function (err, studenttokens) {
+                if (err) next(err);
+
                 res.status(200)
                     .json(studenttokens || []);
             });
@@ -27,7 +69,8 @@ exports = module.exports = function (app) {
                         $filter: {
                             input: '$stud_token',
                             as: 'token',
-                            cond: { $eq: ['$$token.code', req.params.passcode] }
+                            cond: { $eq: ['$$token.code', req.params.passcode] },
+
                         }
                     }
                 }
@@ -69,6 +112,7 @@ exports = module.exports = function (app) {
 
         var data = {
             stud_token: arr,
+            stud_token_status: true,
             stud_org_id: req.body.stud_org_id,
             stud_dealer_id: req.body.stud_dealer_id,
             stud_uid: req.body.stud_dealer_id + '.' + req.body.stud_org_id

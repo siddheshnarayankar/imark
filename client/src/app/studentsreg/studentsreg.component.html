@@ -1,64 +1,77 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4 push-md-4">
-      <div class="student-login" *ngIf="!isValidLogin">
-        <h1>Student Login Here</h1>
-        <form [formGroup]="loginStudForm" role="form" (ngSubmit)="onStudentLogin(loginStudForm)">
-          <alert></alert>
-          <div class="form-content">
-            <div class="form-group">
-              <input type="text" name="std_id" formControlName="std_id" class="form-control input-underline input-lg" placeholder="Enter ID"
-                autofocus required>
-            </div>
-            <div class="form-group">
-              <input type="text" name="std_passcode" formControlName="std_passcode" class="form-control input-underline input-lg" placeholder="Enter Passcode"
-                autofocus required>
-            </div>
-            <div class="form-group">
-              <button mat-button class="btn btn-primary" type="submit">Submit</button>
+      <br>
+      <br>
+      <br>
+      <div class="card mb-3" *ngIf="!isValidLogin">
+
+        <div class="card-header">
+          <i class="fa fa-user"></i> <span>Student Login</span>
+        </div>
+
+        <div class="card-body mat-elevation-z8">
+          <div class="card-block">
+
+            <div class="student-login" >
+
+              <form [formGroup]="loginStudForm" role="form" (ngSubmit)="onStudentLogin(loginStudForm)">
+                <alert></alert>
+                <div class="form-content">
+                  <div class="form-group">
+                    <input type="text" name="std_id" formControlName="std_id" class="form-control input-underline input-lg" placeholder="Enter ID"
+                      autofocus required>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="std_passcode" formControlName="std_passcode" class="form-control input-underline input-lg" placeholder="Enter Passcode"
+                      autofocus required>
+                  </div>
+                  <div class="form-group">
+                    <button mat-button class="btn btn-primary" type="submit">Submit</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </form>
+        </div>
+      </div>
+      <div class="card mb-3"  *ngIf="isValidLogin">
+        <div class="card-header">
+          <i class="fa fa-user"></i> <span>Enter Student Details</span>
+        </div>
+        <div class="card-body mat-elevation-z8">
+
+          <div class="card-block">
+            <div class="student-data" >
+              <form class="hidden" [formGroup]="candidateForm" (ngSubmit)="onCandidateForm(candidateForm)">
+                <div class="form-group">
+                  <input matInput type="text" formControlName="cand_name" class="form-control" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                  <input matInput type="text" formControlName="cand_age" class="form-control" placeholder="Your Age">
+                </div>
+                <div class="form-group">
+                  <input id="photo" type="file" (change)="onFileChange($event)" value="test" />
+                </div>
+
+
+                <button mat-button class="btn btn-primary" type="submit">Send</button>
+
+              </form>
+            </div>
+
+          </div>
+        </div>
       </div>
 
-      <div class="student-data" *ngIf="isValidLogin">
-        <form class="hidden" [formGroup]="candidateForm" (ngSubmit)="onCandidateForm(candidateForm)">
-        <div class="form-group">
-          <input matInput type="text" formControlName="cand_name" class="form-control" placeholder="Your name">
-        </div>
-        <div class="form-group">
-          <input matInput type="text" formControlName="cand_age" class="form-control" placeholder="Your Age">
-        </div>
-        <div class="form-group">
-          <input id="photo" type="file" (change)="onFileChange($event)" value="test" />
-        </div>
-     
-
-        <button mat-button class="btn btn-primary" type="submit">Send</button>
-
-      </form>
-      </div>
 
     </div>
-  </div>
-</div>
 
 
 
-<div>
-  <!--<form class="hidden" [formGroup]="candidateForm" (ngSubmit)="onSubmit(candidateForm)">
-        <div class="form-group">
-          <input matInput type="text" formControlName="cand_name" class="form-control" placeholder="Your name">
-        </div>
-        <div class="form-group">
-          <input matInput type="text" formControlName="cand_age" class="form-control" placeholder="Your Age">
-        </div>
-        <div class="form-group">
-          <input id="photo" type="file" (change)="onFileChange($event)" value="test" />
-        </div>
-     
+    <div>
 
-        <button mat-button class="btn btn-primary" type="submit">Send</button>
+    </div>
+    <div>
 
-      </form>-->
-</div>
+    </div>
