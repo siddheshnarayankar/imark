@@ -1,18 +1,38 @@
 'use strict';
 var router = require('express').Router();
 var passport = require('passport');
-
+var ObjectId = require('mongoose').Types.ObjectId;
 exports = module.exports = function(app) {
 	router.get('/', function(req, res, next) {
 		// Get all the users
 		app.models.User.find({})
-			.select('first_name last_name username email role')
+			.select('first_name last_name username email role userID')
 			.exec(function(err, users) {
 				if(err) next(err);
 				
 				res.status(200)
 				.json(users || []);
 			});
+	});
+		router.get('/:id', function(req, res, next) {
+		// Get all the users
+		var isValidID= ObjectId.isValid(req.params.id);
+		 if(isValidID){
+		  app.models.User.find({ _id: req.params.id})
+			.exec(function(err, users) {
+				if(err){
+					console.log(err);
+				}
+				
+				res.status(200)
+				.json(users || []);
+			});
+		 }else{
+			 res.status(500)
+				.json([]);
+		 }
+
+
 	});
 	router.post('/', registerUser('User has been added successfully.'));
 	router.put('/:id', function(req, res, next) {
@@ -100,7 +120,8 @@ exports = module.exports = function(app) {
 					username: user.username,
 					email: user.email,
 					role: user.role,
-					token: token
+					token: token,
+					_id:user._id
 				});
 			});
 
@@ -167,7 +188,8 @@ exports = module.exports = function(app) {
 				last_name: req.body.last_name,
 				username: req.body.username,
 				email: req.body.email,
-				role:req.body.role
+				role:req.body.role,
+				userID:Math.floor(Math.random() * 1000000)
 			}), req.body.password, function (err, user) {
 
 				if (err) {

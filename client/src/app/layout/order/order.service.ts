@@ -35,7 +35,7 @@ export class OrderService {
 
   // Dealer Details API
   public getDealerDetails(id): Observable<any> {
-    return this.http.get(this.url + "/" + id);
+    return this.http.get(this.url + "/collegeDetails/" + id);
   }
 
   public addCandidates(data): Observable<any> {

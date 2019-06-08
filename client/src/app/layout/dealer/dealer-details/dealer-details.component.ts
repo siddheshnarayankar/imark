@@ -34,6 +34,11 @@ export class DealerDetailsComponent implements OnInit {
 
   toggleFlag: boolean = false;
 
+
+  //New
+  collegeDetails:any;
+  curr_collegeId:any;
+
   public uploader: FileUploader = new FileUploader({ url: URL + "/test", itemAlias: 'photo' });
 
   constructor(
@@ -53,6 +58,7 @@ export class DealerDetailsComponent implements OnInit {
     // Get ID 
     this.activateRoute.params.subscribe(params => {
       this.get_dealer_org_id = params.id;
+      this.curr_collegeId = params.id
       console.log(params.id, 'params');
 
     });
@@ -79,84 +85,54 @@ export class DealerDetailsComponent implements OnInit {
 
 
   onDealerDetails() {
-    this.dealerService.getDealerDetails(this.get_dealer_org_id).subscribe(
+    this.dealerService.getDealerDetails(this.curr_collegeId).subscribe(
       resp => {
-        this.get_dealer_details.push(resp);
+        this.collegeDetails = resp;
+        
+        console.log(this.collegeDetails,'College Details');
+       // this.stud_token_status = this.get_dealer_details[0].status;
 
-        this.stud_token_status = this.get_dealer_details[0].status;
-
-        if (this.get_dealer_details[0].status === 'true') {
-          this.toggleFlag = true;
-        } else {
-          this.toggleFlag = false;
-        }
-        this.getCurrentTokensCounts();
-
+        
+       this.getCurrentTokensCounts();
+      this.dtTrigger.next();
       },
       error => this.alertService.error(error)
     );
   }
 
+
  
-  onStudentTokenGenerate(form: FormGroup) {
-    let stud_randNo;
-
-    form.controls['stud_dealer_id'].setValue(this.curr_token_decoded_id);
-    form.controls['stud_org_id'].setValue(this.get_dealer_org_id);
-
-
-    this.dealerService.genrateToken(form.value)
-      .subscribe(
-      resp => {
-        console.log(resp);
-
-        // this.get_toknes.push(resp);
-
-        // this.excelService.exportAsExcelFile(resp, 'this.get_dealer_details[0].name');
-        this.getCurrentTokens();
-        this.setStudentTokenStatus();
-      },
-      error => this.alertService.error(error)
-      );
-
-  }
 
   getCurrentTokens() {
-    this.dealerService.getGenrateTokens(this.get_dealer_org_id).subscribe(
-      res => {
-        // console.log(res, 'current Tokens');
-        // console.log(res[0].stud_uid, 'uid');
-        this.students_url = res[0].stud_uid;
-        this.excelService.exportAsExcelFile(res[0].stud_token, 'Students passcode list');
-        this.dtTrigger.next();
-      })
+    // this.dealerService.getGenrateTokens(this.curr_collegeId).subscribe(
+    //   res => {
+
+    //     this.collegeDetails =  res;
+        //console.log(this.collegeDetails[0].stud_token, 'current Tokens');
+
+        //console.log(res[0].stud_uid, 'uid');
+        //this.students_url = res.studenttokens[0].stud_uid;
+        this.excelService.exportAsExcelFile(this.collegeDetails[0].stud_token, 'Students passcode list');
+      //   this.dtTrigger.next();
+      // })
   }
 
 
   getCurrentTokensCounts() {
-    this.dealerService.getGenrateTokens(this.get_dealer_org_id).subscribe(
-      res => {
-        // console.log(res, 'current Tokens');
-        // console.log(res[0].stud_uid, 'uid');
-        if (res.length) {
-          this.getTokensListCountD = res[0].stud_token.length;
-          // console.log(this.getTokensListCountD, 'getTokensListCount');
-          let s = res[0].stud_token.filter((item) => {
+      console.log(this.collegeDetails.length);
+        if (this.collegeDetails.length) {
+          this.getTokensListCountD = this.collegeDetails[0].stud_token.length;
+          console.log(this.getTokensListCountD, 'getTokensListCount');
+
+          let s = this.collegeDetails[0].stud_token.filter((item) => {
             if (item.status == true) {
               return true;
             }
           })
 
           this.getTokensListCountC = s.length;
-          // console.log(this.getTokensListCountC, 'getTokensListCount after');
-          // this.excelService.exportAsExcelFile(res[0].stud_token, 'Students passcode list');
-          this.dtTrigger.next();
+        
         }
-
-      })
-
-
-
   }
 
   setStudentTokenStatus() {

@@ -44,7 +44,7 @@ exports = module.exports = function (app) {
 
     });
     router.get('/:id', function (req, res, next) {
-        app.models.Candidate.find({ cand_org_id: req.params.id })
+        app.models.Candidate.find({ cand_org_id: req.params.id },{_v: 0,cand_dealer_id:0,cand_org_id:0})
             .exec(function (err, candidate) {
                 if (err) next(err);
 
@@ -55,13 +55,42 @@ exports = module.exports = function (app) {
 
     
 
+ 	router.put('/:id', function (req, res, next) {
+	  var data = {
+            cand_firstName: req.body.cand_firstName,
+            cand_MiddleName: req.body.cand_MiddleName,
+            cand_LastName: req.body.cand_LastName,
+            cand_DOB: req.body.cand_DOB,
+            cand_age: req.body.cand_age,
+            cand_blood_group: req.body.cand_blood_group,
+            cand_gender: req.body.cand_gender,
+            cand_phoneNumber: req.body.cand_phoneNumber,
 
+            cand_image_name:req.body.cand_image_name
+        }
+		app.models.Candidate.findOneAndUpdate({ _id : req.params.id }, data, { new: true }, function (err, candidate) {
+			if (err) return next(err);
 
+			res.status(200).json({
+				candidate: candidate,
+				message: 'candidate status has been updated successfully.',
+				status:true
+			});
+
+		});
+	});
 
     router.post('/', function (req, res, next) {
         var data = {
-            cand_name: req.body.cand_name,
+            cand_firstName: req.body.cand_firstName,
+            cand_MiddleName: req.body.cand_MiddleName,
+            cand_LastName: req.body.cand_LastName,
+            cand_DOB: req.body.cand_DOB,
             cand_age: req.body.cand_age,
+            cand_blood_group: req.body.cand_blood_group,
+            cand_gender: req.body.cand_gender,
+            cand_phoneNumber: req.body.cand_phoneNumber,
+        
             cand_org_id: req.body.cand_org_id,
             cand_dealer_id:req.body.cand_dealer_id,
             cand_image_fold:req.body.cand_image_fold,

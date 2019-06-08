@@ -46,6 +46,7 @@ export class AuthService {
   }
 
   public setUserInfo(user) {
+    console.log(user);
     let uinfo = {
       userName: user.username,
       email: user.email,

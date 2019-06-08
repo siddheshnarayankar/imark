@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 push-md-4">
+      <br>
+      <br>
+      <br>
+      <div class="card mb-3" *ngIf="!isValidLogin">
+
+        <div class="card-header">
+          <i class="fa fa-user"></i> <span>College Lists</span>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <select matInput class="form-control" name="role" [(ngModel)]="selectedCollegeList" placeholder="Select Role">
+          <option *ngFor="let item of collegeList" value="{{item.orgURLPrfix}}">{{item.orgName}}</option>
+          
+        </select>
+
+          </div>
+          <div class="form-group">
+            <a routerLink="{{selectedCollegeList}}" class="btn btn-primary">Go to Register</a>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

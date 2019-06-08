@@ -36,6 +36,9 @@ export class AlertService {
         this.alert(AlertType.Warning, message);
     }
 
+    errorValid(message: string) {
+        this.alert(AlertType.Error, message);
+    }
     alert(type: AlertType, message: string) {
         this.subject.next(<Alert>{ type: type, message: message });
     }

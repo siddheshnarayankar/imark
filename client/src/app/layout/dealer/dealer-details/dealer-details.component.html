@@ -3,66 +3,34 @@
     <i class="fa fa-th-list"></i> College Details
   </div>
   <div class="card-body mat-elevation-z8">
-    <table class="table" *ngIf="toggleFlag">
+    <table class="table" >
       <thead>
         <tr>
           <th>Colleges Name</th>
           <th>Location Name</th>
-          <th>UID</th>
+          <th>Passcode</th>
+          <th>College URL</th>
           <th>Total/Current</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let dealer_item of get_dealer_details">
-          <th>{{dealer_item.name}}</th>
-          <th>{{dealer_item.location}}</th>
-          <th><a href="javascript:void(0)" (click)="getCurrentTokens()">Get UID</a> </th>
+        <tr *ngFor="let dealer_item of collegeDetails">
+          <th>{{dealer_item.orgName}}</th>
+          <th>{{dealer_item.orgAdd}}</th>
+          <th><a href="javascript:void(0)" (click)="getCurrentTokens()">Download</a> </th>
+          <th><a href="college/{{dealer_item.orgURLName}}" target="_blank">college/{{dealer_item.orgURLName}}</a></th>
           <th>{{getTokensListCountD}}/{{getTokensListCountC}}</th>
         </tr>
       </tbody>
     </table>
 
 
-    <br>
-    <table class="table" *ngIf="toggleFlag">
-      <thead>
-        <tr>
-          <th>UID Links copy</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th><a href="#" target="_blank">{{students_url}}</a></th>
-        </tr>
-      </tbody>
-    </table>
+   
 
 
 
 
-
-    <div class="card-section" *ngIf="!toggleFlag">
-    
-      <h4>Create Students passcode and URL</h4>
-      <form [formGroup]="studentTokenForm" (ngSubmit)="onStudentTokenGenerate(studentTokenForm)">
-        <div class="form-group" *ngFor="let dealer_item of get_dealer_details">
-          <input matInput type="text" formControlName="stud_count" class="form-control" maxlength="10" placeholder="Enter Totoal Students">
-        </div>
-        <div class="form-group">
-          <button mat-button class="btn btn-primary" type="submit">Generate Token</button>
-        </div>
-      </form>
-      <!--<hr>
-        <mat-tab-group>
-          <mat-tab label="by Own">
-
-          </mat-tab>
-          <mat-tab label="by Student">
-
-          </mat-tab>
-        </mat-tab-group>-->
-    </div>
-
+ 
 
 
 

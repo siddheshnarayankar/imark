@@ -20,7 +20,7 @@ export class SharedService implements HttpInterceptor {
             } else if (event instanceof NavigationEnd) {
                 this.isLoading.next(false);
                 let pageTitle = this.getTitle(this.router.routerState.snapshot.root).join(' - ');
-                this.titleService.setTitle(pageTitle + ' - Angular4-MEAN-CRUD');
+                this.titleService.setTitle(pageTitle + ' - Imark');
             }
         });
     }

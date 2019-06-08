@@ -19,3 +19,18 @@
 
     }
 }
+.astrick-icon {
+    font-size: 12px;
+    top: -3px;
+    display: inline-block;
+    position: relative;
+}
+.error {
+  color: red;
+}
+.error-msg {
+  display: block;
+//   position: absolute;
+  font-size: 75%;
+//   bottom: -2em;
+}

@@ -3,17 +3,52 @@ var Schema = mongoose.Schema;
 
 var Dealer = new Schema(
 	{
-		name: {
+		orgName: {
 			type: String,
 			required: false,
 			trim: true
 		},
-		location: {
+		orgAdd: {
 			type: String,
 			required: false,
 			trim: true
 		},
-		curr_dealer_id: {
+				orgPhoneNumber: {
+			type: String,
+			required: false,
+			trim: true
+		},
+				orgIDLayout: {
+			type: String,
+			required: false,
+			trim: true
+		},
+		orgStdCount: {
+			type: String,
+			required: false,
+			trim: true
+		},
+		ordersField: {
+			type: Array,
+			required: false,
+			trim: true
+		},
+		stud_token: {
+			type: Array,
+			required: false,
+			trim: true
+		},
+		dealer_id: {
+			type: String,
+			required: false,
+			trim: true
+		},
+		orgURLPrfix: {
+			type: String,
+			required: false,
+			trim: true
+		},
+		orgURLName: {
 			type: String,
 			required: false,
 			trim: true
@@ -26,4 +61,4 @@ var Dealer = new Schema(
 	}
 );
 
-module.exports = mongoose.model('Dealer', Dealer);
+module.exports = mongoose.model('College', Dealer);

@@ -36,6 +36,11 @@ var User = new Schema(
 			type:String,
 			required:true,
 			trim:true
+		},
+		userID:{
+			type:String,
+			required:true,
+			trim:true
 		}
 	},
 	{

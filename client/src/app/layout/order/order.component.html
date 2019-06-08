@@ -1,6 +1,67 @@
 <div [@routerTransition]>
-	<app-page-header [heading]="'Order Form'" [icon]="'fa-th-list'"></app-page-header>
+	<app-page-header [heading]="title" [icon]="'fa-th-list'"></app-page-header>
 
-	 
- 
+
+	<div class="row">
+		<div class="col-sm-10">
+			<form [formGroup]="orderForm" novalidate>
+				<div class="row">
+					<div class="col-sm-6">
+
+						<div class="form-group">
+							<label>College Name<span class="astrick-icon" [ngClass]="{'error':hasError('orgName', 'required')}">*</span></label>
+							<input type="text" id="orgName" formControlName="orgName" class="form-control" required>
+						</div>
+					</div>
+
+					<div class="col-sm-6">
+
+						<div class="form-group">
+							<label>College url Name<span class="astrick-icon"  [ngClass]="{'error':hasError('orgURLName', 'required')}">*</span></label>
+							<input type="text" id="orgURLName" pattern="^[a-z]*$" formControlName="orgURLName" class="form-control" required>
+							<mat-error *ngIf="hasError('orgURLName', 'pattern')"><span class="error f-12">No space and Number</span></mat-error>
+
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Address<span class="astrick-icon" [ngClass]="{'error':hasError('orgAdd', 'required')}">*</span></label>
+							<input matInput type="text" formControlName="orgAdd" class="form-control" required>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Phone Number<span class="astrick-icon" >*</span></label>
+							<input matInput type="text" formControlName="orgPhoneNumber" class="form-control" required>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Layout</label>
+							<select matInput class="form-control" formControlName="orgIDLayout">
+                                <option  value="">ID Lyaout</option>
+									<option  value="Landscape">Landscape</option>
+									<option  value="Landscape">Protrait</option>
+								</select>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Students Counts<span class="astrick-icon" [ngClass]="{'error':hasError('orgStdCount', 'required')}">*</span></label>
+							<input matInput type="text" [attr.disabled]="isSave ? '' : null" formControlName="orgStdCount" pattern="\d*" min="1" class="form-control"
+							 required>
+							<mat-error *ngIf="hasError('orgStdCount', 'pattern')"><span class="error f-12">Number required</span></mat-error>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="form-group">
+					<button mat-button class="btn btn-primary" *ngIf="!isSave" (click)="onOrderFormSubmit(orderForm)">Create Order</button>
+					<button mat-button class="btn btn-primary" *ngIf="isSave" (click)="onOrderFormUpdate(orderForm)">Update</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
 </div>

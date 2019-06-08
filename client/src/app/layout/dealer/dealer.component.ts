@@ -21,6 +21,9 @@ export class DelearComponent implements OnInit {
 	dealerOrgId: any;
 	isDealerDetails: boolean = false;
 	curr_token_decoded_id: string;
+
+	//New 
+	dealerId:any;
 	constructor(
 		public dialog: MatDialog,
 		private dealerService: DealerService,
@@ -50,11 +53,12 @@ export class DelearComponent implements OnInit {
 		};
 
 		let curr_token = JSON.parse(localStorage.getItem('userInfo') || '{}');
-		let curr_token_decode = jwtDecode(curr_token.token);
-		this.curr_token_decoded_id = curr_token_decode._id;
-	 console.log(this.curr_token_decoded_id);
+		//let curr_token_decode = jwtDecode(curr_token.token);
+		this.dealerId = curr_token.id;
+	   console.log(this.curr_token_decoded_id);
 
-		this.dealerService.get(this.curr_token_decoded_id)
+	   // Get Colleges Details for Current Dealer  
+		this.dealerService.get(this.dealerId)
 			.subscribe(
 			resp => {
 				this.dealers = resp;

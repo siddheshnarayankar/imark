@@ -35,7 +35,7 @@ export class DealerService {
 
   // Dealer Details API
   public getDealerDetails(id): Observable<any> {
-    return this.http.get(this.url + "/" + id);
+    return this.http.get(this.url + "/collegeDetails/" + id);
   }
 
   public addCandidates(data): Observable<any> {
@@ -54,7 +54,7 @@ export class DealerService {
   public genrateToken(data): Observable<any> {
     return this.http.post(this.url_2, data);
   }
-  public getGenrateTokens(current_Org_id): Observable<any> {
-    return this.http.get(this.url_2 + "/" + current_Org_id);
+  public getGenrateTokens(curr_college_id): Observable<any> {
+    return this.http.get(this.url + "/getTokens/" + curr_college_id);
   }
 }

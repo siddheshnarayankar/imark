@@ -4,25 +4,37 @@
     <i class="fa fa-user"></i> <span>User Colleges Details</span>
   </div>
 
+
+
   <div class="card-body mat-elevation-z8">
     <div class="card-block">
-      <table class="table">
+      <div *ngFor="let item of usersDetails">
+        <h5>Dealer Name: <span>{{item.full_name}}</span></h5>
+      </div>
+    </div>
+    <div class="card-block">
+
+
+
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered" id="dataTable" width="100%"
+        cellspacing="0" class="table">
         <thead>
           <tr>
             <th>Colleges Name</th>
             <th>Location Name</th>
             <th>Records</th>
             <th>Folder Links</th>
-            <th>Status</th>
+            <!--<th>Status</th>-->
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of user_org_list">
-            <td>{{item.name}}</td>
-            <td>{{item.location}}</td>
-            <td><a href="javascript:void(0)" (click)="getListOfStud(item._id);" *ngIf="countStdPer === 100">Get List</a> </td>
-            <td><a href="E:/GitImarkCode/imark/uploads/" target="_blank">Download here</a></td>
-            <td><a href="javascript:void(0)" (click)="getStudentStatus(item._id);">Status</a> <b class="alert-success">{{countStdPer}}%</b></td>
+            <td>{{item.orgName}}</td>
+            <td>{{item.orgAdd}}</td>
+            <!--<td><a href="javascript:void(0)" (click)="getListOfStud(item._id);" *ngIf="countStdPer === 100">Download</a> </td>-->
+            <td><a href="javascript:void(0)" (click)="getListOfStud(item.orgURLPrfix,item.orgName);">Download</a> </td>
+            <td><a href="E:/GitImarkCode/imark/uploads/" target="_blank">Download</a></td>
+            <!--<td><a href="javascript:void(0)" (click)="getStudentStatus(item._id);">Status</a> <b class="alert-success">{{countStdPer}}%</b></td>-->
           </tr>
         </tbody>
       </table>

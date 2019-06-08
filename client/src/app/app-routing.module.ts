@@ -22,7 +22,7 @@ const routes: Routes = [
     canActivate: [GuestGuard]
   },
   {
-    path: 'studentsreg',
+    path: 'college',
     loadChildren: './studentsreg/studentsreg.module#StudentsregModule',
     data: { title: 'Students Register Form' },
     canActivate: [GuestGuard]

@@ -5,6 +5,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material';
+import {MatCheckboxModule} from '@angular/material/checkbox'
 import { ReactiveFormsModule } from '@angular/forms'
  
 
@@ -23,7 +24,8 @@ import { OrderService } from './order.service';
         MatDialogModule,
         MatTabsModule,
         AlertModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        
     ],
     declarations: [
         OrderComponent

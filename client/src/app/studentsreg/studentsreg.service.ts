@@ -12,8 +12,12 @@ export class StudentsregService {
 
   constructor(private http: HttpClient) { }
 
-  public get(std_d_id, std_o_id, passcode): Observable<any> {
-    return this.http.get(this.url_2 + "/" + std_d_id + "/" + std_o_id + "/" + passcode);
+  public get(urlLink, passcode): Observable<any> {
+    return this.http.get(this.url + "/" + urlLink + "/" + passcode);
+  }
+
+  public getCollegeList():Observable<any>{
+    return this.http.get(this.url + '/' + 'dealers')
   }
 
   public add(data): Observable<any> {
@@ -31,16 +35,21 @@ export class StudentsregService {
     return this.http.post(this.url_1 + "/test", data);
   }
 
-  public getCurrentOrgDetails(current_Org_id): Observable<any> {
-    return this.http.get(this.url + "/" + current_Org_id);
+  public getCurrentOrgDetails(orgURLPrfix): Observable<any> {
+    return this.http.get(this.url + "/" + orgURLPrfix);
   }
 
   public addCandidates(data): Observable<any> {
     return this.http.post(this.url_1, data);
   }
-  public setStatusFlag(std_d_id, std_o_id,passcode): Observable<any> {
-    return this.http.put(this.url_2 + "/codestatus/" + std_d_id + "/" + std_o_id + "/" + passcode,'false');
+  public updateCandidates(id,data): Observable<any> {
+    return this.http.put(this.url_1 + "/" + id, data);
+  }
+  public setStatusFlag(urlLink,passcode): Observable<any> {
+    return this.http.put(this.url + "/codestatus/"  + urlLink + "/" + passcode,'false');
   }
 
-
+  public getURLPrfix(urlLink): Observable<any> {
+    return this.http.get(this.url + "/getUrlPrfix/" + urlLink);
+  }
 }
