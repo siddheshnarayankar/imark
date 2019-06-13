@@ -9,6 +9,8 @@
           <i class="fa fa-user"></i> <span>Student Login</span>
         </div>
 
+
+
         <div class="card-body mat-elevation-z8">
           <div class="card-block">
 
@@ -40,49 +42,75 @@
 
           <div class="card-block">
             <div class="student-data">
-              <form class="hidden" [formGroup]="candidateForm" >
-                   <alert></alert>
+              <form class="hidden" [formGroup]="candidateForm">
+                <alert></alert>
+                <div class="row">
+                  <div class="col-sm-4 offset-sm-4">
+
+                    <div class="form-group">
+
+                      <div class="file-field">
+                        <div class="input-f1">
+                         
+                          <img width="150px" *ngIf="!imageSrc" src="../assets/images/placeholder-avatar.jpg" class="rounded-circle z-depth-1-half avatar-pic"
+                            alt="example placeholder avatar">
+                             <img width="150px"  *ngIf="imageSrc" [src]="imageSrc" class="rounded-circle z-depth-1-half avatar-pic"
+                            alt="example placeholder avatar">
+                            
+                        </div>
+                        <div class="input-f2">
+                          <div class="input-button btn btn-primary">
+                            <span>Add photo</span>
+                            <input id="photo"  accept="image/*" type="file" (change)="onFileChange($event)" value="test" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <br>
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>First Name<span class="astrick-icon" [ngClass]="{'error':hasError('cand_firstName', 'required')}">*</span></label>
-                      <input matInput type="text" formControlName="cand_firstName" class="form-control"  required>
+                      <input matInput type="text" formControlName="cand_firstName" class="form-control" required>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Middle Name</label>
-                      <input matInput type="text" formControlName="cand_MiddleName" class="form-control" >
+                      <input matInput type="text" formControlName="cand_MiddleName" class="form-control">
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Last Name<span class="astrick-icon" [ngClass]="{'error':hasError('cand_LastName', 'required')}">*</span></label>
-                      <input matInput type="text" formControlName="cand_LastName" class="form-control"  required>
+                      <input matInput type="text" formControlName="cand_LastName" class="form-control" required>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Date Of Birth<span class="astrick-icon" [ngClass]="{'error':hasError('cand_DOB', 'required')}">*</span></label>
-                      <input matInput type="date" formControlName="cand_DOB" class="form-control"  required>
+                      <input matInput type="date" formControlName="cand_DOB" class="form-control" required>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Age</label>
-                      <input matInput type="text" formControlName="cand_age" class="form-control"  >
+                      <input matInput type="text" formControlName="cand_age" class="form-control">
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Blood Group</label>
-                      <input matInput type="text" formControlName="cand_blood_group" class="form-control"  >
+                      <input matInput type="text" formControlName="cand_blood_group" class="form-control">
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Gender<span class="astrick-icon" [ngClass]="{'error':hasError('cand_gender', 'required')}">*</span></label>
-                      <select matInput class="form-control" formControlName="cand_gender" required >
+                      <select matInput class="form-control" formControlName="cand_gender" required>
                                 <option  value="">Select Gender</option>
           <option  value="male">Male</option>
           <option  value="female">Female</option>
@@ -92,19 +120,14 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Phone Number</label>
-                      <input matInput type="text" formControlName="cand_phoneNumber" class="form-control"  >
+                      <input matInput type="text" formControlName="cand_phoneNumber" class="form-control">
                     </div>
                   </div>
                   <div class="clearfix"></div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label>Upload Photo</label>
-                      <input id="photo" type="file" (change)="onFileChange($event)" value="test" />
-                    </div>
-                  </div>
+
                 </div>
 
-                <button mat-button class="btn btn-primary" *ngIf="!isSave"  (click)="onCandidateForm(candidateForm)" type="submit">Send</button>
+                <button mat-button class="btn btn-primary" *ngIf="!isSave" (click)="onCandidateForm(candidateForm)" type="submit">Send</button>
                 <button mat-button class="btn btn-primary" *ngIf="isSave" (click)="onCandidateUpdate(candidateForm)" type="submit">Update</button>
               </form>
             </div>

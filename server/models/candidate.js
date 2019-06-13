@@ -63,6 +63,11 @@ var Candidate = new Schema(
 			required: false,
 			trim: true
 		},
+		cand_image_base: {
+		    type: String,
+			required: false,
+			trim: true
+		},
 		cand_image_name: {
 			type: String,
 			required: false,

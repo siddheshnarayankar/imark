@@ -2,12 +2,16 @@ import { Component, OnInit, ElementRef, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DealerService } from './../dealer.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Subject } from 'rxjs/Rx';
+import { Subject} from 'rxjs/Rx';
 import { DeleteDialog, AlertService } from '../../../shared';
 import { ExcelService } from './../dealer-org-execel.service';
 import { FileUploader } from 'ng2-file-upload';
 import * as jwtDecode from "jwt-decode";
 const URL: string = "/api/candidates";
+// import {forkJoin} from "rxjs/observable/forkJoin";
+import { saveAs } from "file-saver";
+import * as JSZip from "jszip";
+ 
 
 @Component({
   selector: 'app-dealer-details',
@@ -38,8 +42,11 @@ export class DealerDetailsComponent implements OnInit {
   //New
   collegeDetails:any;
   curr_collegeId:any;
+   
 
-  public uploader: FileUploader = new FileUploader({ url: URL + "/test", itemAlias: 'photo' });
+  getRequests = [];
+
+  // public uploader: FileUploader = new FileUploader({ url: URL + "/test", itemAlias: 'photo' });
 
   constructor(
     private fb: FormBuilder,
@@ -79,10 +86,14 @@ export class DealerDetailsComponent implements OnInit {
     });
 
 
+
     this.onDealerDetails();
 
   }
+ 
+ 
 
+ 
 
   onDealerDetails() {
     this.dealerService.getDealerDetails(this.curr_collegeId).subscribe(

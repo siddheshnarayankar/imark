@@ -36,7 +36,8 @@ export class StudentsregComponent implements OnInit {
   isSave:boolean = false;
   candCurrentId:any;
   isImgUpload:boolean = false;
-
+  currentPasscode:any;
+  imageSrc:any;
   public uploader: FileUploader = new FileUploader({ url: URL + "/test", itemAlias: 'photo' });
 
   constructor(private fb: FormBuilder, private activateRoute: ActivatedRoute, private el: ElementRef, private studentsregService: StudentsregService,
@@ -81,6 +82,7 @@ export class StudentsregComponent implements OnInit {
       cand_phoneNumber: new FormControl(''),       
       cand_image_fold: '',
       cand_image_name: '',
+      cand_image_base:'',
       cand_org_id: '',
       cand_dealer_id: ''
     });
@@ -92,11 +94,14 @@ export class StudentsregComponent implements OnInit {
 
   //For Update 
   onCandidateUpdate(form: FormGroup){
+
+  
   if(this.isImgUpload){
     this.isImgUpload = false;
     this.pickNumber = Math.floor((Math.random() * 5000000) + 1);
     this.upload(this.pickNumber);
    }
+     if (form.valid) {
 
     form.controls['cand_image_name'].setValue(this.pickNumber);
     this.studentsregService.updateCandidates(this.candCurrentId,form.value).subscribe(
@@ -104,6 +109,12 @@ export class StudentsregComponent implements OnInit {
           console.log(resp,'resp')
       }
     )
+
+    }
+ else{
+      console.log('asd')
+		  this.alertService.errorValid('Enter Required Fields *');
+	  }
   }
 
   // For Save 
@@ -120,14 +131,13 @@ export class StudentsregComponent implements OnInit {
 
 
 if (form.valid) {
-
-
     form.controls['cand_dealer_id'].setValue(this.get_dealer_details.dealer_id);
     form.controls['cand_org_id'].setValue(this.orgURLPrfix);
     form.controls['cand_image_fold'].setValue(this.orgURLPrfix + this.get_dealer_details.orgName);
     form.controls['cand_image_name'].setValue(this.pickNumber);
+     form.controls['cand_image_base'].setValue(this.imageSrc);
+    
     //  this.candidateForm.
-
 
 
 
@@ -137,7 +147,7 @@ if (form.valid) {
       resp => {
         this.candCurrentId = resp.candidate._id;
         console.log('respo', this.candCurrentId);
-
+        this.setStatusFalg(this.orgURLPrfix, this.currentPasscode);
 
       this.isSave = true;
         // this.alertService.success('Submitted Successfully :)')
@@ -162,14 +172,31 @@ if (form.valid) {
 
 
   onFileChange(event) {
+    
     this.isImgUpload = true;
+    console.log(event);
     let reader = new FileReader();
+      var pattern = /image-*/;
+
     if (event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
-
+   if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+      reader.onload = this._handleReaderLoaded.bind(this);
       reader.readAsDataURL(file);
       console.log(file['name']);
     }
+  }
+
+  _handleReaderLoaded(e) {
+    let reader = e.target;
+
+    this.imageSrc = reader.result;
+
+
+    console.log(this.imageSrc)
   }
 
   upload(stdName) {
@@ -239,11 +266,12 @@ if (form.valid) {
             //  console.log(resp[0].stud_token[0].status, 'login details');
             if (resp[0].stud_token.length && resp[0].stud_token[0].status === true) {
               this.isValidLogin = true;
-              this.setStatusFalg(this.orgURLPrfix, form.value.std_passcode);
+              this.currentPasscode = form.value.std_passcode;
                this.getCurrentOrgDetails();
               console.log('True');
             } else {
               this.isValidLogin = false;
+
               this.alertService.info('Token used');
 
             }

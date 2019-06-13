@@ -188,7 +188,7 @@ exports = module.exports = function(app) {
 				last_name: req.body.last_name,
 				username: req.body.username,
 				email: req.body.email,
-				role:req.body.role,
+				role:req.body.role | 'admin',
 				userID:Math.floor(Math.random() * 1000000)
 			}), req.body.password, function (err, user) {
 

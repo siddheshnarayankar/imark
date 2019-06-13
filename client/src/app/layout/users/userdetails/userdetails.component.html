@@ -33,7 +33,7 @@
             <td>{{item.orgAdd}}</td>
             <!--<td><a href="javascript:void(0)" (click)="getListOfStud(item._id);" *ngIf="countStdPer === 100">Download</a> </td>-->
             <td><a href="javascript:void(0)" (click)="getListOfStud(item.orgURLPrfix,item.orgName);">Download</a> </td>
-            <td><a href="E:/GitImarkCode/imark/uploads/" target="_blank">Download</a></td>
+            <td><a href="javascript:void(0)" (click)="download()"  >Download</a></td>
             <!--<td><a href="javascript:void(0)" (click)="getStudentStatus(item._id);">Status</a> <b class="alert-success">{{countStdPer}}%</b></td>-->
           </tr>
         </tbody>

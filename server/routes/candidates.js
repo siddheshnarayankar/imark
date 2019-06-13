@@ -12,7 +12,7 @@ let storage = multer.diskStorage({
         // cb(null,  file.originalname );
         let type = file.originalname.split('.');
         let dirName = type[0] + type[1];
-        let path = `./uploads/${dirName}`;
+        let path = `./client/src/assets/uploads/${dirName}`;
         let fss = fs.mkdirsSync(path);
         cb(null, path);
     },
@@ -66,7 +66,8 @@ exports = module.exports = function (app) {
             cand_gender: req.body.cand_gender,
             cand_phoneNumber: req.body.cand_phoneNumber,
 
-            cand_image_name:req.body.cand_image_name
+            cand_image_name: req.body.cand_image_name
+            // cand_image_base:req.body.cand_image_base
         }
 		app.models.Candidate.findOneAndUpdate({ _id : req.params.id }, data, { new: true }, function (err, candidate) {
 			if (err) return next(err);
@@ -94,7 +95,8 @@ exports = module.exports = function (app) {
             cand_org_id: req.body.cand_org_id,
             cand_dealer_id:req.body.cand_dealer_id,
             cand_image_fold:req.body.cand_image_fold,
-            cand_image_name:req.body.cand_image_name
+            cand_image_name:req.body.cand_image_name,
+            cand_image_base: req.body.cand_image_base
         }
 
         console.log(data);
