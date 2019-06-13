@@ -146,22 +146,30 @@ dtOptions = {};
     console.log(selectedOrgId);
     this.userService.getCandidateList(selectedOrgId).subscribe(
       resp => {
+
+        if(resp.length){}
         //  this.dtTrigger.next();
         this.candidateList = resp;
         this.excelService.exportAsExcelFile(resp, collegeName + " " + 'candidates Records');
        // console.log(resp, 'Stude list');
-        //console.log(this.candidateList,'this.candidateList');
+        console.log(this.candidateList[0].cand_image_fold,'this.candidateList');
   for(let i=0;i < this.candidateList.length;i++){
+    if(this.candidateList[i].cand_image_base){
   let base64Str =  this.candidateList[i].cand_image_base.split(',');
 //  console.log(base64Str,'base64Str');
   //console.log(base64Str[1],'base64Str');
   jszip.file(this.candidateList[i].cand_image_fold + "/"  + this.candidateList[i].cand_image_name + ".png", base64Str[1] , {base64: true});
-  }
 
+    }
+ 
+ }
+  var folderName = this.candidateList[0].cand_image_fold;
   jszip.generateAsync({ type: 'blob' }).then(function(content) {
     // see FileSaver.js
-    saveAs(content, this.candidateList[0].cand_image_fold + '.zip');
+    saveAs(content, folderName + '.zip');
   });
+
+
       },
       error => this.alertService.error(error)
     );
