@@ -152,7 +152,7 @@ dtOptions = {};
         this.candidateList = resp;
         this.excelService.exportAsExcelFile(resp, collegeName + " " + 'candidates Records');
        // console.log(resp, 'Stude list');
-        console.log(this.candidateList[0].cand_image_fold,'this.candidateList');
+        // console.log(this.candidateList[0].cand_image_fold,'this.candidateList');
   for(let i=0;i < this.candidateList.length;i++){
     if(this.candidateList[i].cand_image_base){
   let base64Str =  this.candidateList[i].cand_image_base.split(',');
