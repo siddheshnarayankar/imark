@@ -139,12 +139,9 @@ if (formData.valid) {
 						text: 'Order Form Updated',
 						type: 'success',
 						showCancelButton: false,
-						confirmButtonText: 'Ok',
-						  onClose: () => {
-
-							
- 							 }
-					}) 
+						confirmButtonText: 'Ok'
+					 
+					})
 				}
 				
 		})
@@ -179,13 +176,10 @@ if (formData.valid) {
 			showCancelButton: false,
 			confirmButtonText: 'Ok',
 		}).then((result) => {
-			if (result.value) {
-				 
-
-				// For more information about handling dismissals please visit
-				// https://sweetalert2.github.io/#handling-dismissals
-			}
-		})
+						setTimeout(()=>{
+								this.router.navigate(['/dealer']);
+						},0)
+						}) 
 
 	  }else{
 		  console.log('Not Valid',formData)
