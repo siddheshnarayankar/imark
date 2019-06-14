@@ -38,7 +38,7 @@ export class UserService {
   }
 
   public getCandidateList(id): Observable<any> {
-    return this.http.get(this.url_1 + "/" + id);
+    return this.http.get(this.url_2 + "/" + id);
   }
 
   public getTokenStatus(id): Observable<any> {

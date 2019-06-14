@@ -147,8 +147,9 @@ dtOptions = {};
     this.userService.getCandidateList(selectedOrgId).subscribe(
       resp => {
 
-        if(resp.length){}
+        // if(resp.length){}
         //  this.dtTrigger.next();
+        console.log(resp);
         this.candidateList = resp;
         this.excelService.exportAsExcelFile(resp, collegeName + " " + 'candidates Records');
        // console.log(resp, 'Stude list');
