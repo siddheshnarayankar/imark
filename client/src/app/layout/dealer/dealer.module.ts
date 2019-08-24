@@ -6,7 +6,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms'
-import { FileSelectDirective } from 'ng2-file-upload';
+// import { FileSelectDirective } from 'ng2-file-upload';
 
 import { DealerRoutingModule } from './dealer-routing.module';
 import { DelearComponent } from './dealer.component';
@@ -31,8 +31,8 @@ import { ExcelService } from './dealer-org-execel.service';
     declarations: [
         DelearComponent,
         DealerDetailsComponent,
-        DealerOrgAddEditDialog,
-        FileSelectDirective
+        DealerOrgAddEditDialog
+        // FileSelectDirective
     ],
     providers: [
         DealerService,

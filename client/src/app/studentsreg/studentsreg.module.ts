@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { SharedService, PageHeaderModule, AlertModule } from './../shared';
 import { StudentsregRoutingModule } from './studentsreg-routing.module';
 import { StudentsregComponent } from './studentsreg.component';
-import { StudentsregComponent1 } from './studentsreg1.component';
+// import { StudentsregComponent1 } from './studentsreg1.component';
 
 
 import { StudentsregService } from './studentsreg.service'
@@ -28,8 +28,7 @@ import { StudentsregService } from './studentsreg.service'
         ReactiveFormsModule
     ],
     declarations: [
-        StudentsregComponent,
-        StudentsregComponent1
+        StudentsregComponent
     ],
     providers: [
         StudentsregService,

@@ -162,7 +162,6 @@ dtOptions = {};
   jszip.file(this.candidateList[i].cand_image_fold + "/"  + this.candidateList[i].cand_image_name + ".png", base64Str[1] , {base64: true});
 
     }
- 
  }
   var folderName = this.candidateList[0].cand_image_fold;
   jszip.generateAsync({ type: 'blob' }).then(function(content) {

@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subject } from 'rxjs/Rx';
 import { DeleteDialog, AlertService } from '../shared';
 //import { ExcelService } from './../dealer-org-execel.service';
-import { FileUploader } from 'ng2-file-upload';
+// import { FileUploader } from 'ng2-file-upload';
 import * as jwtDecode from "jwt-decode";
 import Swal from 'sweetalert2'
 
@@ -38,7 +38,7 @@ export class StudentsregComponent implements OnInit {
   isImgUpload:boolean = false;
   currentPasscode:any;
   imageSrc:any;
-  public uploader: FileUploader = new FileUploader({ url: URL + "/test", itemAlias: 'photo' });
+  // public uploader: FileUploader = new FileUploader({ url: URL + "/test", itemAlias: 'photo' });
 
   constructor(private fb: FormBuilder, private activateRoute: ActivatedRoute, private el: ElementRef, private studentsregService: StudentsregService,
     private alertService: AlertService) { }

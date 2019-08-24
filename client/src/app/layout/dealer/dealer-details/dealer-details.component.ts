@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subject} from 'rxjs/Rx';
 import { DeleteDialog, AlertService } from '../../../shared';
 import { ExcelService } from './../dealer-org-execel.service';
-import { FileUploader } from 'ng2-file-upload';
+// import { FileUploader } from 'ng2-file-upload';
 import * as jwtDecode from "jwt-decode";
 const URL: string = "/api/candidates";
 // import {forkJoin} from "rxjs/observable/forkJoin";
