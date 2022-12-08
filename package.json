@@ -51,7 +51,7 @@
     "@angular/router": "^4.2.4",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.6",
     "angular-datatables": "^4.4.1",
-    "body-parser": "~1.18.2",
+    "body-parser": "~1.20.1",
     "cookie-parser": "~1.4.3",
     "core-js": "^2.4.1",
     "datatables.net": "^1.10.16",
