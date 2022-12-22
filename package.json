@@ -61,7 +61,7 @@
     "debug": "~2.6.9",
     "file-saver": "^2.0.2",
     "font-awesome": "4.7.0",
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "^9.0.0",
     "jszip": "^3.2.1",
     "jwt-decode": "^2.2.0",
     "mongoose": "^4.12.4",
